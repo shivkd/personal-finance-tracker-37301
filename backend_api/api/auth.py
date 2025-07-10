@@ -4,10 +4,12 @@ from sqlalchemy.future import select
 
 from models.user import User
 from schemas.user import UserCreate, UserRead, Token
-from core.auth import verify_password, get_password_hash, create_access_token
+from core.auth import verify_password, get_password_hash, create_access_token, get_current_user_websocket
 from core.database import get_db
-
 router = APIRouter()
+
+# Expose get_current_user_websocket for use in main.py
+get_current_user_websocket = get_current_user_websocket
 
 # PUBLIC_INTERFACE
 @router.post("/register", response_model=UserRead, summary="Register new user")
